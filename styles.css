@@ -1,0 +1,202 @@
+/* Ogólne ustawienia dla całej strony */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9; /* Jasne tło */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Nagłówek */
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Podtytuł */
+h2 {
+    color: #555;
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+
+
+
+/* Styl dla wyników */
+#result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e3e3e3;
+    border-radius: 8px;
+    width: 80%;
+}
+
+#result h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#result p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* Wytłumaczenie */
+#explanation {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
+}
+
+/* Styl dla każdego akapitu w wyjaśnieniu */
+#explanation h3 {
+    font-size: 1.4em;
+    color: #333;
+}
+
+#explanation p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.5;
+}
+
+
+tryb {
+    font-family: 'Courier New', Courier, monospace; /* Styl przypominający coś luksusowego, jak w LV */
+    font-size: 0.8em; /* Większa czcionka */
+    color: #0ff16d; /* Złoty kolor, który kojarzy się z luksusem */
+    font-weight: bold; /* Pogrubienie tekstu */
+    text-transform: uppercase; /* Wszystko w wielkich literach */
+    text-shadow: 0 0 5px #0ff16d, 0 0 20px #0ff16d, 0 0 30px #0ff16d; /* Efekt świecenia */
+    transition: all 0.3s ease-in-out; /* Płynne przejście */
+}
+
+tryb1 {
+    font-family: 'Courier New', Courier, monospace; /* Styl przypominający coś luksusowego, jak w LV */
+    font-size: 0.8em; /* Większa czcionka */
+    color: #fdc408; /* Złoty kolor, który kojarzy się z luksusem */
+    font-weight: bold; /* Pogrubienie tekstu */
+    text-transform: uppercase; /* Wszystko w wielkich literach */
+    text-shadow: 0 0 5px #fdc408, 0 0 20px #fdc408, 0 0 30px #fdc408; /* Efekt świecenia */
+    transition: all 0.3s ease-in-out; /* Płynne przejście */
+}
+
+tryb2 {
+    font-family: 'Courier New', Courier, monospace; /* Styl przypominający coś luksusowego, jak w LV */
+    font-size: 0.8em; /* Większa czcionka */
+    color: #dd4949; /* Złoty kolor, który kojarzy się z luksusem */
+    font-weight: bold; /* Pogrubienie tekstu */
+    text-transform: uppercase; /* Wszystko w wielkich literach */
+    text-shadow: 0 0 5px #dd4949, 0 0 20px #dd4949, 0 0 30px #dd4949; /* Efekt świecenia */
+    transition: all 0.3s ease-in-out; /* Płynne przejście */
+}
+
+/* Styl dla elementu <COD> */
+COD {
+    font-family: 'Arial', sans-serif; /* Czcionka przypominająca numerację */
+    color: #313131; /* Kolor niebieski (możesz zmienić na dowolny) */
+    font-weight: bold; /* Pogrubienie */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Cień, żeby wyglądało jak numer */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Lekki cień dookoła */
+
+}
+
+/* Ogólny styl przycisków */
+button {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    color: #3b82f6;
+    background-color: #f3f7fe;
+    padding: 12px 30px;
+    margin: 10px 0; /* DODAJEMY odstęp pionowy między przyciskami */
+    border: 3px solid #3b82f6;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block; /* żeby każdy przycisk był pod sobą */
+    width: 100%; /* opcjonalnie pełna szerokość */
+    max-width: 600px; /* ale z limitem, żeby nie był za duży */
+    text-align: center;
+    box-shadow: 0 4px 11px rgba(37, 44, 97, 0.15), 0 1px 3px rgba(93, 100, 148, 0.2);
+    position: relative; /* <<< TO DODAJEMY! */
+    overflow: hidden; /* <<< Żeby efekt nie wychodził poza przycisk */
+}
+
+/* Efekt hover */
+button:hover {
+    background-color: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 8px 22px rgba(37, 44, 97, 0.15), 0 4px 6px rgba(93, 100, 148, 0.2);
+    border-color: #3b82f6;
+}
+
+/* Piękny efekt "glow" przy najechaniu */
+button:hover::before {
+    opacity: 1;
+}
+
+/* Glow wokół przycisku */
+button::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    border-radius: 25px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Animacja Glow */
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Gdy przycisk aktywny */
+button:active {
+    transform: scale(0.98);
+}
+
+
+gratulacje {
+    color: green;
+    font-size: 34px;
+    font-family: 'Arial', sans-serif;
+    
+    text-decoration: underline;
+    text-align: center;
+    line-height: 3.5em;
+}

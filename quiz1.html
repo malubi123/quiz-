@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>  
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">      
+    <title>Quiz: pytanie.1</title>   
+    <script>
+        const BIN_ID = "680fd82a8561e97a50098ddc"; // Twój Bin ID
+        const API_KEY = "$2a$10$dXFcnzajLnvq/gnYrL5Ox.F55N.CJ2QfRZY2H47q0XPF1uiNLgYsS"; // Twój API KEY
+
+
+
+
+        const correctAnswer = 'B'; // <-- Poprawna odpowiedź
+        let selectedOption = null; // <- Zapamiętujemy kliknięcie
+
+
+
+
+
+        async function sendAnswer(option) {
+            selectedOption = option; 
+
+            let przyciski = document.querySelectorAll("button");
+            przyciski.forEach(function(przycisk) {
+                przycisk.disabled = true;
+
+                // SPRAWDZAMY onclick zamiast data-option
+                if (przycisk.getAttribute('onclick') === `sendAnswer('${correctAnswer}')`) {
+                    przycisk.style.backgroundColor = "green"; 
+                } else {
+                    przycisk.style.backgroundColor = "red"; 
+                }
+            });
+
+            // --- Wysyłanie głosu do JSONbin ---
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: {
+                    'X-Master-Key': API_KEY
+                }
+            });
+            const data = await response.json();
+            const votes = data.record;
+
+            votes[option]++;
+
+            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify(votes)
+            });
+
+            // Wyświetlenie wyników i wytłumaczenia
+            showResults();
+            showExplanation();
+        }
+
+        async function showResults() {
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                headers: {
+                    'X-Master-Key': API_KEY
+                }
+            });
+            const data = await response.json();
+            const votes = data.record;
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = "<h2>Wyniki:</h2>";
+            for (let option in votes) {
+                if (option === selectedOption) {
+                    resultDiv.innerHTML += `<p style="color: blue;"><strong>${option}: ${votes[option]} osoba/y</strong></p>`;
+                } else {
+                    resultDiv.innerHTML += `<p>${option}: ${votes[option]} osoba/y</p>`;
+                }
+            }
+        }
+
+        function showExplanation() {
+            let explanationDiv = document.getElementById('explanation');
+            explanationDiv.style.display = 'block';
+
+            if (selectedOption === correctAnswer) {
+                explanationDiv.innerHTML = "<h3>Wytłumaczenie:</h3><p> HTML (Hypertext Markup Language) to język znaczników używany do tworzenia struktury stron internetowych. Pozwala definiować elementy takie jak nagłówki, akapity, listy, tabele, linki i obrazy, które tworzą widoczny interfejs użytkownika. HTML nie jest językiem programowania, ponieważ nie obsługuje logiki sterującej (np. pętli czy warunków), ale jest fundamentem, na którym opiera się frontend aplikacji webowych.  </p>";
+            } else {
+                explanationDiv.innerHTML = "<h3>Wytłumaczenie:</h3><p> HTML (Hypertext Markup Language) to język znaczników używany do tworzenia struktury stron internetowych. Pozwala definiować elementy takie jak nagłówki, akapity, listy, tabele, linki i obrazy, które tworzą widoczny interfejs użytkownika. HTML nie jest językiem programowania, ponieważ nie obsługuje logiki sterującej (np. pętli czy warunków), ale jest fundamentem, na którym opiera się frontend aplikacji webowych.  </p>";
+            }
+        }
+           // Funkcja nasłuchująca na naciśnięcie Enter
+        window.addEventListener("keydown", function(event) {
+            // Sprawdzamy, czy kliknięto Enter i jeśli tak, przekierowujemy na następną stronę
+            if (event.key === "Enter" && selectedOption !== null) {
+                window.location.href = "quiz2.html"; // Zmieniamy stronę na quiz2.html
+            }
+        });
+
+        window.onload = showResults;
+    </script>        
+    <link rel="icon" href="favicon.png" type="image/png"> 
+    <link rel="stylesheet" href="styles.css">
+</head> 
+
+
+
+<body>
+ 
+
+
+
+
+
+
+
+
+
+
+    <h1>   pytanie: <COD>1</COD> <tryb>Easy</tryb> </h1>
+
+    <h2> Co to jest Html </h2>
+
+    <button onclick="sendAnswer('A')" > A.to skrót językowy używany niegdyś w informatyce który oznacza coś łatwego    </button>
+    <button onclick="sendAnswer('B')" > B.to język znaczników którego używa się do tworzenia Frontendu strony skrót html oznacza Hypertext Markup Language  </button>
+    <button onclick="sendAnswer('C')" > C.to część komputera która służy do przechowywania pamięci ram     </button>
+
+
+    
+    <h4> <div id="result"></div> </h4>
+
+
+    <h5> <div id="explanation" style="display: none; margin-top: 20px; padding: 20px; background-color: #f0f0f0; border-radius: 8px;">
+        <!-- Tutaj pojawi się wytłumaczenie -->
+    </div> </h5>
+
+
+
+
+</body>
